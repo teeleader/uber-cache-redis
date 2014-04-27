@@ -5,8 +5,14 @@ var _ = require('lodash'),
 
 module.exports = function(options) {
 
-  var client = redis.createClient(),
-      handle = new EventEmitter();
+  var client = null;
+  if (options.redisConfig) {
+    client = redis.createClient(options.redisConfig.host, options.redisConfig.port, options.redisConfig)
+  } else {
+    client = redis.createClient()
+  }
+  
+  var handle = new EventEmitter();
 
   client.on('error', function(err) {
     handle.emit('error', err);
