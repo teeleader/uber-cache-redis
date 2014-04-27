@@ -7,7 +7,7 @@ module.exports = function(options) {
 
   var client = null;
   if (options.redisConfig) {
-    client = redis.createClient(options.redisConfig.host, options.redisConfig.port, options.redisConfig)
+    client = redis.createClient(options.redisConfig.port, options.redisConfig.host, options.redisConfig)
   } else {
     client = redis.createClient()
   }
